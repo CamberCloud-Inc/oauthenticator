@@ -26,7 +26,7 @@ class CamberOAuthenticator(GenericOAuthenticator):
         auth_api_key = os.environ.get("AUTH_API_KEY")
         if auth_site_url and auth_api_key:
             user_groups = requests.get(
-                f"{auth_site_url}/user/{user.name}/?key={auth_api_key}",
+                f"{auth_site_url}/users/{user.name}/?key={auth_api_key}",
                 verify=False
             ).json()
             groups = user_groups.get("groups")
