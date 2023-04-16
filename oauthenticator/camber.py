@@ -16,10 +16,8 @@ class CamberOAuthenticator(GenericOAuthenticator):
             ).json()
             groups = user_groups.get("groups")
             self.log.info(f"Collected groups for user {user.name}: {groups}")
-            if groups and isinstance(groups, list):
-                # N.B. Only support one group for now
-                # TODO: Support multiple groups
-                spawner.environment["CAMBER_GROUP"] = groups.pop(0)
+            spawner.environment["CAMBER_USERNAME"] = user.name
+            spawner.environment["CAMBER_GROUPS"] = ",".join(groups)
         else:
             self.log.warning("No `AUTH_SITE_URL` or `AUTH_API_KEY` set for CamberHub")
 
