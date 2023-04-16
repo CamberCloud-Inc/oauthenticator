@@ -76,6 +76,7 @@ setup_args = dict(
             'local-okpy = oauthenticator.okpy:LocalOkpyOAuthenticator',
             'openshift = oauthenticator.openshift:OpenShiftOAuthenticator',
             'local-openshift = oauthenticator.openshift:LocalOpenShiftOAuthenticator',
+            'camber-oauth = oauthenticator.camber:CamberOAuthenticator',
         ],
     },
     classifiers=[
