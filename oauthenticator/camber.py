@@ -6,21 +6,6 @@ import requests
 
 class CamberOAuthenticator(GenericOAuthenticator):
 
-    def pre_spawn_start(self, user, spawner):
-        auth_site_url = os.environ.get("AUTH_SITE_URL")
-        auth_api_key = os.environ.get("AUTH_API_KEY")
-        if auth_site_url and auth_api_key:
-            user_groups = requests.get(
-                f"{auth_site_url}/users/{user.name}/?key={auth_api_key}",
-                verify=False
-            ).json()
-            groups = user_groups.get("groups")
-            self.log.info(f"Collected groups for user {user.name}: {groups}")
-            spawner.environment["CAMBER_USERNAME"] = user.name
-            spawner.environment["CAMBER_GROUPS"] = ",".join(groups)
-        else:
-            self.log.warning("No `AUTH_SITE_URL` or `AUTH_API_KEY` set for CamberHub")
-
     async def authenticate(self, handler, data=None):
         code = handler.get_argument("code")
 
